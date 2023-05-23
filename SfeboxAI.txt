@@ -1,0 +1,30 @@
+/*
+Analitik fonksiyonlar, bir grup satırı ele alarak toplam değeri hesaplar.
+Analitik işlevler, toplama işlevlerinden farklı olarak her grup için birden çok satır döndürebilir.
+Grup içindeki ortalamaları, değerlerin toplamlarını, yüzdeleri veya 
+ilk N değer üzerinde yapılan işlem sonucunu hesaplamak için analitik işlevleri kullanabilirsiniz.
+
+Bu kod, her bir "column_name" değeri için bir sonraki değeri "next_value" olarak döndürecektir. 
+LEAD fonksiyonu, bir sonraki değeri döndürmek için sıralama sütunu kullanır. 
+Sıralama sütununa bağlı olarak, son değer için NULL döndürülebilir
+
+LEAD fonksiyonu, analitik sorgularda veya veri akışı analizinde bir sonraki değeri tahmin etmek veya 
+mevcut değeri bir sonraki değerle karşılaştırmak için kullanışlı bir araçtır.
+*/
+
+select first_name,last_name,
+	LEAD(first_name) OVER (ORDER BY last_name) as email,
+	LEAD(last_name) OVER (ORDER BY first_name) as email
+FROM customer;
+
+/* sonu 'el' ile biten isimleri getirir.*/
+select first_name from customer
+where first_name like '%el'
+
+/* sonu 'el' ile biten soyisimleri getirir.	*/
+select last_name from customer
+where last_name like '%el'
+
+/* sonu 'el' ile biten mailleri getirir.*/
+select email from customer
+where email like '%el'
